@@ -1,11 +1,11 @@
 const { Router } = require("express");
 const router = Router();
 // import helpers
-const { getDataDb, getDetail } = require("./helpers/helper");
+const { getAllDataDb, getDetail } = require("./helpers/helper");
 
 router.get("/", async (req, res) => {
 	const { name } = req.query;
-	const datadb = await getDataDb();
+	const datadb = await getAllDataDb();
 	//si viene nombre
 	if (name) {
 		const dataFilter = datadb.filter((country) =>
@@ -24,6 +24,9 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
 	const { id } = req.params;
 	const detail = await getDetail(id);
+	if (!detail) {
+		return res.status(404).send("no se encontro el pais");
+	}
 	res.send(detail);
 });
 

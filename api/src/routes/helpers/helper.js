@@ -14,7 +14,7 @@ const getDataApi = async () => {
 				name: country.name.common,
 				img: country.flags[1],
 				continent: country.region,
-				capital: country.capital && country.capital[0],
+				capital: country.capital ? country.capital.join() : "",
 				subcontinent: country.subregion,
 				area: country.area,
 				population: country.population,
@@ -41,19 +41,22 @@ const getDataApi = async () => {
 
 const getDataDb = async () => {
 	const exist = await Countries.findAll({
-		attributes: ["id", "name", "img", "continent"],
+		attributes: ["id"],
 	});
 	if (exist.length === 0) {
 		console.log("data no cargada");
 		await getDataApi();
-		return await Countries.findAll({
-			attributes: ["id", "name", "img", "continent"],
-		});
 	}
 	console.log("data cargada");
-	return exist;
+	return;
 };
 
+const getAllDataDb = async () => {
+	const allData = await Countries.findAll({
+		attributes: ["id", "name", "img", "continent"],
+	});
+	return allData;
+};
 const getDetail = async (id) => {
 	const country = await Countries.findByPk(id.toUpperCase(), {
 		include: Activities,
@@ -82,5 +85,7 @@ const postActivity = async (name, dificulty, duration, season, countries) => {
 module.exports = {
 	getDataDb,
 	getDetail,
+	getAllDataDb,
 	postActivity,
+	getDataApi,
 };

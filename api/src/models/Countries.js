@@ -8,16 +8,16 @@ module.exports = (sequelize) => {
 		{
 			id: {
 				type: DataTypes.STRING(3),
-				allowNull: true,
+				allowNull: false,
 				primaryKey: true,
 			},
 			name: {
 				type: DataTypes.STRING,
-				allowNull: true,
+				allowNull: false,
 			},
 			img: {
 				type: DataTypes.STRING,
-				allowNull: true,
+				allowNull: false,
 			},
 			continent: {
 				type: DataTypes.ENUM([
@@ -28,18 +28,18 @@ module.exports = (sequelize) => {
 					"Asia",
 					"Americas",
 				]),
-				allowNull: true,
+				allowNull: false,
 			},
 			capital: {
 				type: DataTypes.STRING,
-				allowNull: true,
+				allowNull: false,
 			},
 			subcontinent: {
 				type: DataTypes.STRING,
 				allowNull: true,
 			},
 			area: {
-				type: DataTypes.INTEGER,
+				type: DataTypes.DECIMAL,
 				allowNull: true,
 			},
 			population: {
