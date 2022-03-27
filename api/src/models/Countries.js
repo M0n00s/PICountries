@@ -39,7 +39,7 @@ module.exports = (sequelize) => {
 				allowNull: true,
 			},
 			area: {
-				type: DataTypes.DECIMAL,
+				type: DataTypes.DOUBLE,
 				allowNull: true,
 			},
 			population: {
