@@ -1,12 +1,13 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 
-import { CreateActivity } from "../components/createAct/CreateActivity";
-import { DashboardScreen } from "../components/dashboard/DashboardScreen";
-import { DetailCountry } from "../components/detail/DetailCountry";
+import { CreateActivity } from "../components/main/createAct/CreateActivity";
+import { DashboardScreen } from "../components/main/dashboard/DashboardScreen";
+import { DetailCountry } from "../components/main/detail/DetailCountry";
 
 import "../css/dashboard.css";
-import { NavBar } from "../components/dashboard/NavBar";
+import { NavBar } from "../components/aside/NavBar";
+import { Filters } from "../components/aside/Filters";
 
 export const DashboardRouter = () => {
 	return (
@@ -19,6 +20,7 @@ export const DashboardRouter = () => {
 					<p>Created by Abdel Arocha</p>
 				</div>
 				<NavBar />
+				<Filters />
 			</aside>
 			<main className="dashboard__main">
 				<Switch>
@@ -31,6 +33,7 @@ export const DashboardRouter = () => {
 						path="/client/detail/:id"
 						component={DetailCountry}
 					/>
+					<Redirect to="/client/dashboard" />
 				</Switch>
 			</main>
 		</div>
