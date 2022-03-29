@@ -1,0 +1,8 @@
+.dashBoardScreen__container {
+	padding: 2em 0.8em;
+}
+.dashBoardScreen__submenu {
+	height: 30px;
+	display: flex;
+	gap: 10px;
+}
