@@ -1,11 +1,16 @@
-import './App.css';
+import React from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <h1>Henry Countries</h1>
-    </div>
-  );
-}
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { store } from "./redux/store/store";
+import { AppRouter } from "./router/AppRouter";
 
-export default App;
+export const App = () => {
+	return (
+		<Provider store={store}>
+			<BrowserRouter>
+				<AppRouter />
+			</BrowserRouter>
+		</Provider>
+	);
+};
