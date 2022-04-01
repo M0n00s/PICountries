@@ -1,2 +1,4 @@
 export const GET_ALL_DATA = "GET_ALL_DATA";
 export const GET_DATA_BY_NAME = "GET_DATA_BY_NAME";
+export const GET_DETAIL_COUNTRY = "GET_DETAIL_COUNTRY";
+export const GET_DETAIL_RESET = "GET_DETAIL_RESET";
