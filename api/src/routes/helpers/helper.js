@@ -53,7 +53,7 @@ const getDataDb = async () => {
 
 const getAllDataDb = async () => {
 	const allData = await Countries.findAll({
-		attributes: ["id", "name", "img", "continent"],
+		attributes: ["id", "name", "img", "continent", "population"],
 	});
 	return allData;
 };

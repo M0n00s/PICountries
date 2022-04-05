@@ -1,11 +1,15 @@
 import {
+	FILTER_BY_CONTINENT,
 	GET_ALL_DATA,
 	GET_DATA_BY_NAME,
 	GET_DETAIL_COUNTRY,
 	GET_DETAIL_RESET,
+	ORDER_BY_NAME,
+	ORDER_BY_POPULATION,
 } from "./types/types";
 
 const initialState = {
+	countriesFilter: [],
 	countries: [],
 	detail: [],
 };
@@ -16,6 +20,7 @@ export const dataReducer = (state = initialState, action) => {
 			return {
 				...state,
 				countries: action.payload,
+				countriesFilter: action.payload,
 			};
 
 		case GET_DATA_BY_NAME:
@@ -36,6 +41,60 @@ export const dataReducer = (state = initialState, action) => {
 				detail: [],
 			};
 
+		case ORDER_BY_NAME:
+			let byName;
+			let countries = state.countries;
+			action.payload === "ASC"
+				? (byName = countries.sort((a, b) =>
+						a.name > b.name ? 1 : a.name < b.name ? -1 : 0
+				  ))
+				: (byName = countries.sort((b, a) =>
+						a.name > b.name ? 1 : a.name < b.name ? -1 : 0
+				  ));
+
+			return {
+				...state,
+				countries: byName,
+			};
+
+		case ORDER_BY_POPULATION:
+			let byPopu;
+			let countries2 = state.countries;
+			action.payload === "DESC"
+				? (byPopu = countries2.sort((a, b) =>
+						a.population > b.population
+							? 1
+							: a.population < b.population
+							? -1
+							: 0
+				  ))
+				: (byPopu = countries2.sort((b, a) =>
+						a.population > b.population
+							? 1
+							: a.population < b.population
+							? -1
+							: 0
+				  ));
+
+			return {
+				...state,
+				countries: byPopu,
+			};
+
+		case FILTER_BY_CONTINENT:
+			let filterContinent;
+			console.log("payload", action.payload);
+			const countiresAllData = state.countriesFilter;
+			countiresAllData === "all"
+				? (filterContinent = countiresAllData)
+				: (filterContinent = countiresAllData.filter(
+						(country) => country.continent === action.payload
+				  ));
+			console.log(filterContinent);
+			return {
+				...state,
+				countries: filterContinent,
+			};
 		default:
 			return state;
 	}

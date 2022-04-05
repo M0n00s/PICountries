@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 
 import { CreateActivity } from "../components/main/createAct/CreateActivity";
 import { DashboardScreen } from "../components/main/dashboard/DashboardScreen";
@@ -10,6 +10,9 @@ import { NavBar } from "../components/aside/NavBar";
 import { Filters } from "../components/aside/Filters";
 
 export const DashboardRouter = () => {
+	const history = useHistory();
+	const viewFilters = history.location.pathname;
+
 	return (
 		<div className="dashboard__container">
 			<aside className="dashboard__aside">
@@ -20,7 +23,7 @@ export const DashboardRouter = () => {
 					<p>Created by Abdel Arocha</p>
 				</div>
 				<NavBar />
-				<Filters />
+				{viewFilters === "/client/dashboard" && <Filters />}
 			</aside>
 			<main className="dashboard__main">
 				<Switch>

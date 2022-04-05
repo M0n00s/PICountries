@@ -1,0 +1,16 @@
+.activity__container {
+	width: 80%;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.activity__container form {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+.search__countries {
+	width: 800px;
+}

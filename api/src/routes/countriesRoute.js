@@ -5,6 +5,7 @@ const { getAllDataDb, getDetail } = require("./helpers/helper");
 
 router.get("/", async (req, res) => {
 	const { name } = req.query;
+
 	const datadb = await getAllDataDb();
 	//si viene nombre
 	if (name) {
