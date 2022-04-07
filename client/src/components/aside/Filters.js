@@ -1,8 +1,10 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "../../css/navbar.css";
 import {
+	filterByActivities,
 	filterByContinent,
+	getActivitiesName,
 	orderByName,
 	OrderByPopulation,
 } from "../../redux/reducers/actions/action";
@@ -11,6 +13,13 @@ import {
 
 export const Filters = () => {
 	const dispatch = useDispatch();
+	//handle activities select
+	useEffect(() => {
+		dispatch(getActivitiesName());
+	}, [dispatch]);
+	const acti = useSelector((state) => state.data.activities);
+	console.log(acti);
+	// handle filters and order
 	const handleOrderByName = ({ target }) => {
 		dispatch(orderByName(target.value));
 	};
@@ -18,13 +27,16 @@ export const Filters = () => {
 		dispatch(OrderByPopulation(target.value));
 	};
 	const handleFilterContinent = ({ target }) => {
-		console.log(target.value);
 		dispatch(filterByContinent(target.value));
+	};
+	const handleFilterActivities = ({ target }) => {
+		console.log(target.value);
+		dispatch(filterByActivities(target.value));
 	};
 
 	return (
 		<div>
-			<div className="navbar__container">
+			<div className="navbar__filterContainer">
 				<hr />
 				<h4>Ordenamiento</h4>
 				<label htmlFor="alfa">Alfabeticamente</label>
@@ -33,7 +45,6 @@ export const Filters = () => {
 					<option value="ASC">Ascendente</option>
 					<option value="DESC">Descendente</option>
 				</select>
-				<hr />
 				{/* a */}
 				<label htmlFor="popu">Population</label>
 				<select name="popu" onChange={handleOrderByPopulation}>
@@ -43,7 +54,7 @@ export const Filters = () => {
 				</select>
 			</div>
 			{/* FILTRADO*/}
-			<div className="navbar__container">
+			<div className="navbar__filterContainer">
 				<hr />
 				<h4>Filtrado</h4>
 				<label htmlFor="order">Continente</label>
@@ -56,13 +67,15 @@ export const Filters = () => {
 					<option value="Asia">Asia</option>
 					<option value="Americas">Americas</option>
 				</select>
-				<hr />
 				{/* a */}
-				<label htmlFor="order">Population</label>
-				<select name="order">
-					<option value="">Aleatorio</option>
-					<option value="ASC">Ascendente</option>
-					<option value="DESC">Descendente</option>
+				<label htmlFor="activ">Actividad</label>
+				<select name="activ" onChange={handleFilterActivities}>
+					<option value="">Selecciona</option>
+					{acti?.map((activ) => (
+						<option key={activ.id} value={activ.id}>
+							{activ.name}
+						</option>
+					))}
 				</select>
 			</div>
 		</div>

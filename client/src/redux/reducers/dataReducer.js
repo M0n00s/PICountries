@@ -1,4 +1,6 @@
 import {
+	ACTIVITIES_NAME,
+	FILTER_BY_ACTIVITY,
 	FILTER_BY_CONTINENT,
 	GET_ALL_DATA,
 	GET_DATA_BY_NAME,
@@ -12,6 +14,7 @@ const initialState = {
 	countriesFilter: [],
 	countries: [],
 	detail: [],
+	activities: [],
 };
 
 export const dataReducer = (state = initialState, action) => {
@@ -83,17 +86,33 @@ export const dataReducer = (state = initialState, action) => {
 
 		case FILTER_BY_CONTINENT:
 			let filterContinent;
-			console.log("payload", action.payload);
 			const countiresAllData = state.countriesFilter;
 			countiresAllData === "all"
 				? (filterContinent = countiresAllData)
 				: (filterContinent = countiresAllData.filter(
 						(country) => country.continent === action.payload
 				  ));
-			console.log(filterContinent);
 			return {
 				...state,
 				countries: filterContinent,
+			};
+
+		case ACTIVITIES_NAME:
+			return {
+				...state,
+				activities: action.payload,
+			};
+
+		case FILTER_BY_ACTIVITY:
+			const countiresAllData2 = state.countriesFilter;
+			let filterAct = countiresAllData2.filter(
+				(count) => count.activities[0]?.id === action.payload
+			);
+			console.log(action.payload);
+
+			return {
+				...state,
+				countries: filterAct,
 			};
 		default:
 			return state;

@@ -1,4 +1,6 @@
 import {
+	ACTIVITIES_NAME,
+	FILTER_BY_ACTIVITY,
 	FILTER_BY_CONTINENT,
 	GET_ALL_DATA,
 	GET_DATA_BY_NAME,
@@ -77,15 +79,36 @@ export const filterByContinent = (continent) => {
 	};
 };
 
+export const filterByActivities = (id) => {
+	return {
+		type: FILTER_BY_ACTIVITY,
+		payload: id,
+	};
+};
 //--- ruta post
-// export const post =(name, season)=>{
-// 	return async (dispath) => {
-// 		const data = await axios.post('http//:127.0.0.1:3001/activities',{
-// 			name, season
-// 		})
-// 		return data
-// 	}
-// }
+export const postActivity = (payload) => {
+	return async () => {
+		console.log("action");
+		const data = await axios.post(
+			"http://127.0.0.1:3001/activity",
+			payload
+		);
+		return data;
+	};
+};
+
+export const getActivitiesName = () => {
+	return async (dispatch) => {
+		const data = await axios
+			.get(`http://127.0.0.1:3001/activity`)
+			.then((data) => data.data);
+
+		dispatch({
+			type: ACTIVITIES_NAME,
+			payload: data,
+		});
+	};
+};
 
 //-----Ordenamiento podemos cambiar name por vrible
 // Countries.findAll({

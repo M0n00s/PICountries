@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
 		);
 		//si no encuentra data asociada
 		if (dataFilter.length === 0) {
-			return res.status(404).send("no se encontro pais");
+			return res.send([]);
 		}
 		//si la encuentra retorna data
 		return res.status(200).send(dataFilter);

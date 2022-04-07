@@ -22,15 +22,12 @@ export const DetailCountry = () => {
 		};
 	}, [dispatch, id]);
 
-	console.log(detail);
-
 	///------go back
 	const history = useHistory();
 	const handleBack = () => {
 		history.goBack();
 	};
 
-	console.log(detail.activities);
 	return (
 		<div className="detail__container">
 			<div className="goBack">

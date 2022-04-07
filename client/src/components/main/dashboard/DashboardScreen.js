@@ -24,7 +24,7 @@ export const DashboardScreen = () => {
 
 	//----------pagination
 	const handleNext = () => {
-		setPag(pag + 10);
+		if (countries.length > pag + 10) setPag(pag + 10);
 	};
 	const handlePrev = () => {
 		if (pag > 0) setPag(pag - 10);
@@ -37,11 +37,10 @@ export const DashboardScreen = () => {
 	const handlerSubmit = (e) => {
 		e.preventDefault();
 		dispatch(getCountryByName(search));
+		setPag(0);
 		setSearch("");
 	};
-
-	console.log(filteredCountries());
-
+	console.log(countries);
 	return (
 		<div className="dashBoardScreen__container">
 			<div className="dashBoardScreen__submenu">
@@ -70,9 +69,11 @@ export const DashboardScreen = () => {
 				</div>
 			</div>
 			<div className="cards__container ">
-				{filteredCountries().map((country) => (
-					<Cards key={country.id} country={country} />
-				))}
+				{countries.length !== 0
+					? filteredCountries().map((country) => (
+							<Cards key={country.id} country={country} />
+					  ))
+					: "404 error"}
 			</div>
 		</div>
 	);

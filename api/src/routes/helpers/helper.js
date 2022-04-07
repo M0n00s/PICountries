@@ -5,14 +5,14 @@ const { Countries, Activities } = require("../../db");
 const getDataApi = async () => {
 	try {
 		const data = await axios
-			.get("https://restcountries.com/v3/all")
+			.get("https://restcountries.com/v3.1/all")
 			.then((data) => data.data);
 
 		const objDataApi = data.map((country) => {
 			return Countries.create({
 				id: country.cca3,
 				name: country.name.common,
-				img: country.flags[1],
+				img: country.flags.png,
 				continent: country.region,
 				capital: country.capital ? country.capital.join() : "",
 				subcontinent: country.subregion,
@@ -54,6 +54,7 @@ const getDataDb = async () => {
 const getAllDataDb = async () => {
 	const allData = await Countries.findAll({
 		attributes: ["id", "name", "img", "continent", "population"],
+		include: Activities,
 	});
 	return allData;
 };
@@ -82,10 +83,26 @@ const postActivity = async (name, dificulty, duration, season, countries) => {
 	return "Activity creada con exito";
 };
 
+const getActivities = async () => {
+	const activities = await Activities.findAll({
+		attributes: ["id", "name"],
+	});
+	return activities;
+};
+
+const getActivitiesDetail = async (id) => {
+	const country = await Activities.findByPk(Number(id), {
+		include: Countries,
+	});
+	return country;
+};
+
 module.exports = {
 	getDataDb,
 	getDetail,
 	getAllDataDb,
 	postActivity,
 	getDataApi,
+	getActivities,
+	getActivitiesDetail,
 };
