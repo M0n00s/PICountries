@@ -72,7 +72,7 @@ export const Filters = () => {
 				<select name="activ" onChange={handleFilterActivities}>
 					<option value="">Selecciona</option>
 					{acti?.map((activ) => (
-						<option key={activ.id} value={activ.id}>
+						<option key={activ.id} value={activ.name}>
 							{activ.name}
 						</option>
 					))}

@@ -105,8 +105,8 @@ export const dataReducer = (state = initialState, action) => {
 
 		case FILTER_BY_ACTIVITY:
 			const countiresAllData2 = state.countriesFilter;
-			let filterAct = countiresAllData2.filter(
-				(count) => count.activities[0]?.id === action.payload
+			let filterAct = countiresAllData2.filter((count) =>
+				count.activities[0]?.name.includes(action.payload)
 			);
 			console.log(action.payload);
 
