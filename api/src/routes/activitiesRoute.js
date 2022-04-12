@@ -1,11 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 
-const {
-	postActivity,
-	getActivities,
-	getActivitiesDetail,
-} = require("./helpers/helper");
+const { postActivity, getActivities } = require("./helpers/helper");
 
 router.post("/", async (req, res) => {
 	const { name, dificulty, duration, season, countries } = req.body;
@@ -24,11 +20,6 @@ router.post("/", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-	const { id } = req.query;
-	if (id) {
-		const data = getActivitiesDetail(id);
-		return res.send(data);
-	}
 	const data = await getActivities();
 	return res.send(data);
 });

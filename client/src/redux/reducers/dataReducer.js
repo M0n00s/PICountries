@@ -48,11 +48,13 @@ export const dataReducer = (state = initialState, action) => {
 			let byName;
 			let countries = state.countries;
 			action.payload === "ASC"
-				? (byName = countries.sort((a, b) =>
-						a.name > b.name ? 1 : a.name < b.name ? -1 : 0
+				? (byName = countries.sort(
+						(a, b) => a.name.localeCompare(b.name)
+						// a.name > b.name ? 1 : a.name < b.name ? -1 : 0
 				  ))
-				: (byName = countries.sort((b, a) =>
-						a.name > b.name ? 1 : a.name < b.name ? -1 : 0
+				: (byName = countries.sort(
+						(b, a) => a.name.localeCompare(b.name)
+						// a.name > b.name ? 1 : a.name < b.name ? -1 : 0
 				  ));
 
 			return {
@@ -105,10 +107,15 @@ export const dataReducer = (state = initialState, action) => {
 
 		case FILTER_BY_ACTIVITY:
 			const countiresAllData2 = state.countriesFilter;
-			let filterAct = countiresAllData2.filter((count) =>
-				count.activities[0]?.name.includes(action.payload)
-			);
-			console.log(action.payload);
+
+			const filterAct = countiresAllData2.reduce((acumulador, actual) => {
+				let activId = actual.activities.map((el) => el.id);
+
+				if (activId.includes(parseInt(action.payload))) {
+					acumulador.push(actual);
+				}
+				return acumulador;
+			}, []);
 
 			return {
 				...state,

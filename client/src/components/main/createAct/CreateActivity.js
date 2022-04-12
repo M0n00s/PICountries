@@ -16,6 +16,8 @@ export const CreateActivity = () => {
 	const [error, setError] = useState(false);
 	const [pag2, setPag2] = useState(0);
 	const history = useHistory();
+	let [num, setNum] = useState(0);
+	let [time, setTime] = useState("min");
 	const [input, setInput] = useState({
 		name: "",
 		dificulty: "",
@@ -27,6 +29,12 @@ export const CreateActivity = () => {
 	useEffect(() => {
 		dispatch(getDataPrincipal());
 	}, [dispatch]);
+	useEffect(() => {
+		setInput({
+			...input,
+			duration: `${num} ${time}`,
+		});
+	}, [num, time]);
 	// form
 	const { name } = input;
 	const handleInput = ({ target }) => {
@@ -38,6 +46,7 @@ export const CreateActivity = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+
 		//validacion vacio
 		if (
 			input.name.trim() === "" ||
@@ -72,13 +81,20 @@ export const CreateActivity = () => {
 		return countries.slice(pag2, pag2 + 10);
 	};
 	const handleNext = () => {
-		setPag2(pag2 + 10);
+		if (countries.length > pag2 + 10) setPag2(pag2 + 10);
 	};
 	const handlePrev = () => {
 		if (pag2 > 0) setPag2(pag2 - 10);
 	};
 
-	//-----
+	//----- hanlde input duration
+	// const handleDuration = () => {
+	// 	setInput({
+	// 		...input,
+	// 		duration: `${num} ${time}`,
+	// 	});
+	// };
+	console.log(input);
 	return (
 		<div className="activity__container">
 			<div className="form__container">
@@ -104,8 +120,27 @@ export const CreateActivity = () => {
 						<option value="4">4</option>
 						<option value="5">5</option>
 					</select>
+
 					<span>Duracion</span>
-					<input name="duration" type="time" onChange={handleInput} />
+					<div>
+						<input
+							onChange={(e) => setNum(e.target.value)}
+							name="duracion"
+							type="number"
+							// onChange={handleInput}
+						/>
+						<select
+							name="tiempo"
+							onChange={(e) => setTime(e.target.value)}
+						>
+							<option value="min">min</option>
+							<option value="horas">Horas</option>
+
+							<option value="dias">dias</option>
+							<option value="anos">años</option>
+						</select>
+					</div>
+
 					<span>Temporada</span>
 					<select name="season" onChange={handleInput}>
 						<option value="">Selecciona</option>

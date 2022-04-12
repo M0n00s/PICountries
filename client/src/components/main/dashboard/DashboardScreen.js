@@ -40,7 +40,6 @@ export const DashboardScreen = () => {
 		setPag(0);
 		setSearch("");
 	};
-	console.log(countries);
 	return (
 		<div className="dashBoardScreen__container">
 			<div className="dashBoardScreen__submenu">
@@ -73,7 +72,7 @@ export const DashboardScreen = () => {
 					? filteredCountries().map((country) => (
 							<Cards key={country.id} country={country} />
 					  ))
-					: "404 error"}
+					: "no hay resultados en su busqueda"}
 			</div>
 		</div>
 	);

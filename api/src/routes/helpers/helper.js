@@ -90,13 +90,6 @@ const getActivities = async () => {
 	return activities;
 };
 
-const getActivitiesDetail = async (id) => {
-	const country = await Activities.findByPk(Number(id), {
-		include: Countries,
-	});
-	return country;
-};
-
 module.exports = {
 	getDataDb,
 	getDetail,
@@ -104,5 +97,4 @@ module.exports = {
 	postActivity,
 	getDataApi,
 	getActivities,
-	getActivitiesDetail,
 };

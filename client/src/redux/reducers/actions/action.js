@@ -79,10 +79,10 @@ export const filterByContinent = (continent) => {
 	};
 };
 
-export const filterByActivities = (id) => {
+export const filterByActivities = (name) => {
 	return {
 		type: FILTER_BY_ACTIVITY,
-		payload: id,
+		payload: name,
 	};
 };
 //--- ruta post

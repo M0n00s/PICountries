@@ -18,7 +18,6 @@ export const Filters = () => {
 		dispatch(getActivitiesName());
 	}, [dispatch]);
 	const acti = useSelector((state) => state.data.activities);
-	console.log(acti);
 	// handle filters and order
 	const handleOrderByName = ({ target }) => {
 		dispatch(orderByName(target.value));
@@ -30,7 +29,6 @@ export const Filters = () => {
 		dispatch(filterByContinent(target.value));
 	};
 	const handleFilterActivities = ({ target }) => {
-		console.log(target.value);
 		dispatch(filterByActivities(target.value));
 	};
 
@@ -72,7 +70,7 @@ export const Filters = () => {
 				<select name="activ" onChange={handleFilterActivities}>
 					<option value="">Selecciona</option>
 					{acti?.map((activ) => (
-						<option key={activ.id} value={activ.name}>
+						<option key={activ.id} value={activ.id}>
 							{activ.name}
 						</option>
 					))}
