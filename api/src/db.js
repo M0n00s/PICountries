@@ -18,9 +18,10 @@ const sequelize =
 					min: 1,
 					idle: 10000,
 				},
-				dialectOption: {
+				dialectOptions: {
 					ssl: {
 						require: true,
+						// Ref.: https://github.com/brianc/node-postgres/issues/2009
 						rejectUnauthorized: false,
 					},
 					keepAlive: true,
@@ -28,11 +29,8 @@ const sequelize =
 				ssl: true,
 		  })
 		: new Sequelize(
-				`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
-				{
-					logging: false, // set to console.log to see the raw SQL queries
-					native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-				}
+				`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/development`,
+				{ logging: false, native: false }
 		  );
 const basename = path.basename(__filename);
 
