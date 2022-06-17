@@ -14,9 +14,7 @@ router.post("/", async (req, res) => {
 			countries
 		);
 		return res.send(post);
-	} catch (error) {
-		console.log(error);
-	}
+	} catch (error) {}
 });
 
 router.get("/", async (req, res) => {

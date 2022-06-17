@@ -14,9 +14,7 @@ import axios from "axios";
 // get data
 export const getDataPrincipal = () => {
 	return async (dispatch) => {
-		const data = await axios
-			.get(`http://127.0.0.1:3001/countries`)
-			.then((data) => data.data);
+		const data = await axios.get(`/countries`).then((data) => data.data);
 
 		dispatch({
 			type: GET_ALL_DATA,
@@ -28,7 +26,7 @@ export const getDataPrincipal = () => {
 export const getCountryByName = (name) => {
 	return async (dispatch) => {
 		const data = await axios
-			.get(`http://127.0.0.1:3001/countries?name=${name}`)
+			.get(`/countries?name=${name}`)
 			.then((data) => data.data);
 
 		dispatch({
@@ -41,7 +39,7 @@ export const getCountryByName = (name) => {
 export const getDetailCountry = (id) => {
 	return async (dispatch) => {
 		const data = await axios
-			.get(`http://127.0.0.1:3001/countries/${id}`)
+			.get(`/countries/${id}`)
 			.then((data) => data.data);
 
 		dispatch({
@@ -88,20 +86,14 @@ export const filterByActivities = (name) => {
 //--- ruta post
 export const postActivity = (payload) => {
 	return async () => {
-		console.log("action");
-		const data = await axios.post(
-			"http://127.0.0.1:3001/activity",
-			payload
-		);
+		const data = await axios.post("/activity", payload);
 		return data;
 	};
 };
 
 export const getActivitiesName = () => {
 	return async (dispatch) => {
-		const data = await axios
-			.get(`http://127.0.0.1:3001/activity`)
-			.then((data) => data.data);
+		const data = await axios.get(`/activity`).then((data) => data.data);
 
 		dispatch({
 			type: ACTIVITIES_NAME,

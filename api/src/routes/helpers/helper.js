@@ -44,10 +44,8 @@ const getDataDb = async () => {
 		attributes: ["id"],
 	});
 	if (exist.length === 0) {
-		console.log("data no cargada");
 		await getDataApi();
 	}
-	console.log("data cargada");
 	return;
 };
 
@@ -72,7 +70,6 @@ const postActivity = async (name, dificulty, duration, season, countries) => {
 		duration,
 		season,
 	});
-	console.log(countries);
 
 	countries.map(async (CountryId) => {
 		const country = await Countries.findByPk(CountryId.toUpperCase());

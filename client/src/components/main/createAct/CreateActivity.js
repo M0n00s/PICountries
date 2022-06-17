@@ -60,7 +60,6 @@ export const CreateActivity = () => {
 		}
 		setError(false);
 		// dispatch post
-		console.log("dispatch");
 		dispatch(postActivity(input));
 
 		//reset values
@@ -94,7 +93,6 @@ export const CreateActivity = () => {
 	// 		duration: `${num} ${time}`,
 	// 	});
 	// };
-	console.log(input);
 	return (
 		<div className="activity__container">
 			<div className="form__container">
